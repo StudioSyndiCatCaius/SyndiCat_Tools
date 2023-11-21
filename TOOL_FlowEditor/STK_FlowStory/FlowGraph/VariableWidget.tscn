@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://crjqds4r83mna"]
+
+[ext_resource type="Script" path="res://FlowGraph/VariableWidget.gd" id="1_trasw"]
+
+[node name="VariableWidget" type="Control"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_trasw")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "name"
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="value_text" type="TextEdit" parent="HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[connection signal="text_changed" from="HBoxContainer/MarginContainer/value_text" to="." method="_on_text_edit_text_changed"]

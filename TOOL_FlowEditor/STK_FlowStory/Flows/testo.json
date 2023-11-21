@@ -1,0 +1,1 @@
+{"connections":[{"from_node":"173026","from_port":0,"to_node":"3344001","to_port":0}],"nodes":[{"id":"173026","position_x":200,"position_y":40,"properties":{},"template":"res://Nodes/node_BEGIN.json"},{"id":"3344001","position_x":1360,"position_y":180,"properties":{"Flag":"flag"},"template":"res://Nodes/node_FINISH.json"}]}

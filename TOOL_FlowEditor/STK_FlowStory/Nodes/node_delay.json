@@ -1,0 +1,6 @@
+{
+	"title":"Timer",
+	"input":["in"],
+	"output":["begin","finish"],
+	"properties":[{"name":"Duration","default":1.0}]
+}

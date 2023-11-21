@@ -1,0 +1,6 @@
+{
+	"title":"Condition",
+	"input":["in"],
+	"output":["true","false"],
+	"properties":[{"name":"script"}]
+}

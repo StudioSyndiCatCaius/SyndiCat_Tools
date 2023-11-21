@@ -1,0 +1,29 @@
+{
+	"title":"Message",
+	"nodes":[
+		{
+			"id":73864093,
+			"type":"node_begin",
+			"conncections":[
+				{"out":{"id":16940647,"input":"in",}}
+			],
+		},
+		{
+			"id":16940647,
+			"type":"node_delay",
+			"properties":[
+				{"timer":2.5}
+			],
+			"conncections":[
+				{"finish":{"id":73309965,"input":"in",}}
+			],
+		},
+		{
+			"id":73309965,
+			"type":"node_finish",
+			"properties":[
+				{"flag":"on-finish"}
+			],
+		},
+	]
+}

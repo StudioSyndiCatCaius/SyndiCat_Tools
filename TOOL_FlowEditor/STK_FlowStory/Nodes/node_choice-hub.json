@@ -1,0 +1,7 @@
+{
+	"title":"Choice HUB",
+	"CanAddOutput":true,
+	"input":["in"],
+	"output":["out"],
+	"properties":[]
+}

@@ -1,0 +1,7 @@
+{
+	"title":"Finish",
+	"utility":true,
+	"input":["in"],
+	"output":[],
+	"properties":[{"name":"Flag"}]
+}

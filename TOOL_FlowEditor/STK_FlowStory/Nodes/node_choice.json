@@ -1,0 +1,6 @@
+{
+	"title":"choice",
+	"input":["in"],
+	"output":["out"],
+	"properties":[{"name":"text"}]
+}

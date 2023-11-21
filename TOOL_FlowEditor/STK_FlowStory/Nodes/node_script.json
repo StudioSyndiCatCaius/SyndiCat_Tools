@@ -1,0 +1,6 @@
+{
+	"title":"Script",
+	"input":["in"],
+	"output":["out"],
+	"properties":[{"name":"script"}]
+}
