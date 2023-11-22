@@ -3,5 +3,7 @@
 	"utility":true,
 	"input":["in"],
 	"output":[],
-	"properties":[{"name":"Flag"}]
+	"properties":[{"name":"Flag"}],
+	"size_x":150,
+	"size_y":20,
 }

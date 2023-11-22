@@ -2,5 +2,5 @@
 	"title":"Script",
 	"input":["in"],
 	"output":["out"],
-	"properties":[{"name":"script"}]
+	"properties":[{"name":"script","type":"code"}]
 }

@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://crjqds4r83mna"]
+[gd_scene load_steps=3 format=3 uid="uid://crjqds4r83mna"]
 
 [ext_resource type="Script" path="res://FlowGraph/VariableWidget.gd" id="1_trasw"]
+
+[sub_resource type="CodeHighlighter" id="CodeHighlighter_ew67d"]
+number_color = Color(0, 0.905882, 0.705882, 1)
+symbol_color = Color(1, 1, 1, 1)
+function_color = Color(0.211765, 0.564706, 1, 1)
+member_variable_color = Color(0.831373, 0.192157, 0.290196, 1)
 
 [node name="VariableWidget" type="Control"]
 custom_minimum_size = Vector2(0, 35)
@@ -29,7 +35,45 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="value_text" type="TextEdit" parent="HBoxContainer/MarginContainer"]
+visible = false
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
+[node name="value_line" type="TextEdit" parent="HBoxContainer/MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="value_code" type="CodeEdit" parent="HBoxContainer/MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.909804, 0, 0, 1)
+text = "print(\"thing here\")"
+syntax_highlighter = SubResource("CodeHighlighter_ew67d")
+gutters_draw_line_numbers = true
+
+[node name="value_int" type="SpinBox" parent="HBoxContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+min_value = -999999.0
+max_value = 999999.0
+
+[node name="value_float" type="SpinBox" parent="HBoxContainer/MarginContainer"]
+visible = false
+layout_mode = 2
+min_value = -999999.0
+max_value = 999999.0
+step = 0.01
+value = 0.000931322
+
+[node name="value_bool" type="CheckBox" parent="HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
 [connection signal="text_changed" from="HBoxContainer/MarginContainer/value_text" to="." method="_on_text_edit_text_changed"]
+[connection signal="text_changed" from="HBoxContainer/MarginContainer/value_line" to="." method="_on_value_line_text_changed"]
+[connection signal="text_changed" from="HBoxContainer/MarginContainer/value_code" to="." method="_on_value_code_text_changed"]
+[connection signal="value_changed" from="HBoxContainer/MarginContainer/value_int" to="." method="_on_value_int_value_changed"]
+[connection signal="value_changed" from="HBoxContainer/MarginContainer/value_float" to="." method="_on_value_int_value_changed"]
+[connection signal="toggled" from="HBoxContainer/MarginContainer/value_bool" to="." method="_on_value_bool_toggled"]

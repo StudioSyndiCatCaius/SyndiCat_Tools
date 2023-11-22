@@ -3,18 +3,27 @@ extends Control
 @onready var Graph: GraphEdit = $FlowGraph
 @onready var NodeTemp = load("res://FlowGraph/FlowNodeBase.tscn")
 
+var default_graph={
+	"connections":[],
+	"nodes":[
+		{"id":"173026","position_x":100,"position_y":100,"properties":{},"template":"res://Nodes/node_BEGIN.json"},
+		{"id":"3344001","position_x":100,"position_y":400,"properties":{},"template":"res://Nodes/node_FINISH.json"}
+		],
+	}
+
 
 var NodeData={}
-
 var NodeTypes=[]
 
 func _ready():
 	NodeTypes = STK_Utilities.get_json_list_from_path("res://Nodes/")
 	menu_graph.clear()
+	
+	# add nodes to list
 	for i in NodeTypes:
 		menu_graph.add_item(STK_Utilities.json_to_dictionary(i)["title"])
-	print(NodeTypes)
-
+		
+		
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -43,10 +52,9 @@ func _on_flow_graph_connection_request(from_node, from_port, to_node, to_port):
 
 func _on_flow_graph_delete_nodes_request(nodes):
 	for node in selected_nodes:
-		if selected_nodes[node]:
-			remove_connections_to_node(node)
-			node.queue_free()
-	selected_nodes = {}
+		remove_connections_to_node(node)
+		node.queue_free()
+	selected_nodes = []
 
 func _on_flow_graph_disconnection_request(from_node, from_port, to_node, to_port):
 	Graph.disconnect_node(from_node, from_port, to_node, to_port)
@@ -84,22 +92,9 @@ func _create_new_node(template) -> Story_FlowNode:
 # ==================================================================
 # Popup menu: New Node
 # ==================================================================
-@onready var menu_graph: PopupMenu=$menu_graph
+@onready var menu_graph: PopupMenu=%menu_graph
 
 func _input(event):
-	if event is InputEventKey:
-		if event.keycode == KEY_1 and event.pressed:
-			_create_new_node(0)
-		if event.keycode == KEY_2 and event.pressed:
-			_create_new_node(1)
-		if event.keycode == KEY_3 and event.pressed:
-			_create_new_node(2)
-		if event.keycode == KEY_4 and event.pressed:
-			_create_new_node(3)
-		if event.keycode == KEY_5 and event.pressed:
-			_create_new_node(4)
-		if event.keycode == KEY_6 and event.pressed:
-			_create_new_node(5)
 	if event is InputEventMouseButton:
 		# Open "New Node" menu
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
@@ -188,10 +183,13 @@ func _on_file_dialog_load_confirmed():
 func _load_flow(path: String):
 	print(path)
 	var loaded_data: Dictionary = STK_Utilities.json_to_dictionary(path)
+	_create_flow(loaded_data)
+
+func _create_flow(loaded_data: Dictionary):
+	$FlowGraph.clear_connections()
 	var nodes_to_remove = $FlowGraph.get_children()
-	
 	for i in nodes_to_remove:
-		i.queue_free()
+		i.visible=false
 	
 	# load nodes
 	var node_list=loaded_data["nodes"]
@@ -210,6 +208,8 @@ func _load_flow(path: String):
 # TOP MENU: File
 # ==================================================================
 func _on_menu_popup_file_index_pressed(index):
+	if index == 0:
+		_create_flow(default_graph)
 	if index == 1:
 		$Canvas_File/FileDialog_Load.visible=true
 	if index == 2:

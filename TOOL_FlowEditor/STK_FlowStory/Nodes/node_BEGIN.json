@@ -3,4 +3,6 @@
 	"utility":true,
 	"input":[],
 	"output":["out"],
+	"size_x":150,
+	"size_y":50,
 }

@@ -27,7 +27,12 @@ func _rebuild_node():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	var newsize: Vector2=Vector2(200,100)
+	if _get_template_data().has("size_x"):
+		newsize.x = _get_template_data()["size_x"]
+	if _get_template_data().has("size_x"):
+		newsize.y = _get_template_data()["size_y"]
+	size=newsize
 
 func _get_template_data() -> Dictionary:
 	return STK_Utilities.json_to_dictionary(NodeTemplate)

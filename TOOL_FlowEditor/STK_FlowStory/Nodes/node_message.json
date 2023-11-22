@@ -4,6 +4,6 @@
 	"output":["begin","finish"],
 	"properties":[
 		{"name":"Speaker","default":"My Nmae"},
-		{"name":"Text","default":"hello world"}
+		{"name":"Text","default":"hello world","type":"text"}
 		]
 }
