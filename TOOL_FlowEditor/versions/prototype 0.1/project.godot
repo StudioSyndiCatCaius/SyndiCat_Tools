@@ -18,8 +18,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-G_State="*res://Godot/Globals/G_State.gd"
-G_Util="*res://Godot/Globals/G_Util.gd"
+STK_Utilities="*res://Utilities.gd"
 
 [rendering]
 

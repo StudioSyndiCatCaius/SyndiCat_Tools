@@ -1,0 +1,185 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3fgqglcsvu2p"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_2ha4p"]
+[ext_resource type="PackedScene" uid="uid://cfekxurw2y5pg" path="res://FlowGraph/FlowNodeBase.tscn" id="1_f4ecb"]
+[ext_resource type="Texture2D" uid="uid://n2i284q0gp8a" path="res://assets/icons/save.png" id="2_uk3ns"]
+[ext_resource type="Script" path="res://MenuButton.gd" id="3_1m2aq"]
+[ext_resource type="Texture2D" uid="uid://do25omfvp673b" path="res://assets/icons/toolBrush.png" id="4_hflwg"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2ha4p")
+
+[node name="FlowGraph" type="GraphEdit" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 438.0
+offset_top = 35.0
+offset_right = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+
+[node name="FlowNodeBase" parent="FlowGraph" instance=ExtResource("1_f4ecb")]
+layout_mode = 1
+offset_left = 200.0
+offset_top = 200.0
+offset_right = -266.0
+offset_bottom = -277.0
+mouse_filter = 1
+position_offset = Vector2(200, 200)
+NodeTemplate = "res://Nodes/node_BEGIN.json"
+
+[node name="FlowNodeBase2" parent="FlowGraph" instance=ExtResource("1_f4ecb")]
+layout_mode = 1
+offset_left = 198.0
+offset_top = 359.0
+offset_right = -268.0
+offset_bottom = -118.0
+mouse_filter = 1
+position_offset = Vector2(198, 359)
+NodeTemplate = "res://Nodes/node_FINISH.json"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 28.0
+grow_horizontal = 2
+
+[node name="MenuButton_File" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "File"
+icon = ExtResource("2_uk3ns")
+expand_icon = true
+script = ExtResource("3_1m2aq")
+popup_menu_path = NodePath("MenuPopup_File")
+
+[node name="MenuPopup_File" type="PopupMenu" parent="HBoxContainer/MenuButton_File"]
+position = Vector2i(10, 10)
+item_count = 4
+item_0/text = "New Flow"
+item_0/id = 0
+item_1/text = "Load Flow"
+item_1/id = 1
+item_2/text = "Save"
+item_2/id = 2
+item_3/text = "Save As"
+item_3/id = 3
+
+[node name="MenuButton_File2" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Edit"
+icon = ExtResource("4_hflwg")
+expand_icon = true
+script = ExtResource("3_1m2aq")
+popup_menu_path = NodePath("MenuPopup_File")
+
+[node name="MenuPopup_File" type="PopupMenu" parent="HBoxContainer/MenuButton_File2"]
+position = Vector2i(10, 10)
+
+[node name="MenuButton_Nodes" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "New Node"
+icon = ExtResource("4_hflwg")
+expand_icon = true
+script = ExtResource("3_1m2aq")
+popup_menu_path = NodePath("menu_graph")
+
+[node name="menu_graph" type="PopupMenu" parent="HBoxContainer/MenuButton_Nodes"]
+unique_name_in_owner = true
+position = Vector2i(210, 25)
+size = Vector2i(109, 100)
+mouse_passthrough = true
+item_count = 1
+item_0/text = "New Node"
+item_0/id = 0
+
+[node name="Canvas_File" type="CanvasLayer" parent="."]
+
+[node name="FileDialog_Save" type="FileDialog" parent="Canvas_File"]
+initial_position = 2
+size = Vector2i(602, 379)
+root_subfolder = "res://Flows"
+filters = PackedStringArray("*.json")
+
+[node name="FileDialog_Load" type="FileDialog" parent="Canvas_File"]
+title = "Open a File"
+initial_position = 2
+size = Vector2i(602, 379)
+ok_button_text = "Open"
+file_mode = 0
+root_subfolder = "res://Flows"
+filters = PackedStringArray("*.json")
+use_native_dialog = true
+
+[node name="VarBox" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 38.0
+offset_right = 432.0
+grow_vertical = 2
+color = Color(0.207843, 0.207843, 0.207843, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="VarBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VarBox/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VarBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Variables"
+
+[node name="HSeparator" type="HSeparator" parent="VarBox/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VariableList" type="VBoxContainer" parent="VarBox/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label_selectNode" type="Label" parent="VarBox/MarginContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+text = "Select a Node"
+horizontal_alignment = 1
+
+[connection signal="connection_request" from="FlowGraph" to="." method="_on_flow_graph_connection_request"]
+[connection signal="delete_nodes_request" from="FlowGraph" to="." method="_on_flow_graph_delete_nodes_request"]
+[connection signal="disconnection_request" from="FlowGraph" to="." method="_on_flow_graph_disconnection_request"]
+[connection signal="gui_input" from="FlowGraph" to="." method="_on_flow_graph_gui_input"]
+[connection signal="node_deselected" from="FlowGraph" to="." method="_on_flow_graph_node_deselected"]
+[connection signal="node_selected" from="FlowGraph" to="." method="_on_flow_graph_node_selected"]
+[connection signal="pressed" from="HBoxContainer/MenuButton_File" to="HBoxContainer/MenuButton_File" method="_on_pressed"]
+[connection signal="index_pressed" from="HBoxContainer/MenuButton_File/MenuPopup_File" to="." method="_on_menu_popup_file_index_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuButton_File2" to="HBoxContainer/MenuButton_File2" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/MenuButton_Nodes" to="HBoxContainer/MenuButton_Nodes" method="_on_pressed"]
+[connection signal="index_pressed" from="HBoxContainer/MenuButton_Nodes/menu_graph" to="." method="_on_menu_graph_index_pressed"]
+[connection signal="popup_hide" from="HBoxContainer/MenuButton_Nodes/menu_graph" to="." method="_on_menu_graph_popup_hide"]
+[connection signal="confirmed" from="Canvas_File/FileDialog_Save" to="." method="_on_file_dialog_save_confirmed"]
+[connection signal="confirmed" from="Canvas_File/FileDialog_Load" to="." method="_on_file_dialog_load_confirmed"]

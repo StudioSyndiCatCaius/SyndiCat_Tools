@@ -1,0 +1,4 @@
+
+- MODES
+    - Editor:
+    - Debuger: Linked with a relevant engine, used for debuging node states and values.

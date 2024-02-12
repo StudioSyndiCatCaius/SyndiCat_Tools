@@ -1,0 +1,9 @@
+Functions to include in any game engine plugins for FlowEditor.
+___________________
+
+NODE_GetIncoming_ByIndex
+NODE_GetOutgoing_ByIndex
+
+NODE_Enter_ByIndex
+
+NODE_IsValid
